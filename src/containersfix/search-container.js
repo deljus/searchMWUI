@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import SearchView from '../view/search-view';
-import RedactorView from '../view/redactor-view';
-import NewsImageView from '../view/news-image-view'
+import SearchView from '../components/view/search-view';
+import RedactorView from '../components/view/redactor-view';
+import NewsImageView from '../components/view/news-image-view'
 import axios from 'axios';
-import api from '../../api/api-request';
+import api from '../core/api/api-request';
 import { Redirect } from 'react-router'
 
 class SearchContainer extends Component {

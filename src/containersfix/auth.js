@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import api from '../../api/api-request';
+import api from '../core/api/api-request';
 import axios from 'axios';
 
 class AuthContainer extends Component {

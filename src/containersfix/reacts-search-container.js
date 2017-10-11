@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import SearchView from '../view/search-view';
-import ReactSearch from '../view/reactions-searching-view';
+import SearchView from '../components/view/search-view';
+import ReactSearch from '../components/view/reactions-searching-view';
 
 class ReactsSearchContainer extends Component{
 

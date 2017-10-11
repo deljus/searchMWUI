@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import queryString from 'query-string';
 import axios from 'axios';
-import api from '../../api/api-request';
-import AlertView from '../view/alert-view';
-import RedactorView from '../view/redactor-view';
+import api from '../core/api/api-request';
+import AlertView from '../components/view/alert-view';
+import RedactorView from '../components/view/redactor-view';
 import { Redirect } from 'react-router';
-import Select from '../view/select-view';
+import Select from '../components/view/select-view';
 
 class ValidateContainer extends Component {
 
