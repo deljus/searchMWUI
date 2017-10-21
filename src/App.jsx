@@ -2,24 +2,29 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
+import store from './core/store';
 import {
-  AuthContainer,
-  ValidateContainer } from './containers/containers';
+  IndexPage,
+  NotFoundPage,
+  ValidatePage } from './components';
+import { MarvinEditorView, PageStepsView } from './components/WrappedContainers';
 
-const Main = () => (
+const Main = ({ children }) => (
   <div>
-    {this.props.children}
+    <PageStepsView />
+    <MarvinEditorView />
+    {children}
   </div>
 );
 
 export default (
-  <Provider>
+  <Provider store={store}>
     <HashRouter>
       <Main>
         <Switch>
           <Route exact path="/" component={IndexPage} />
-          <Route path="/auth" component={AuthContainer} />
-          <Route path="*" component={NotFound} />
+          <Route exact path="/validate" component={ValidatePage} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </Main>
     </HashRouter>

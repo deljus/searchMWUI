@@ -3,6 +3,11 @@ export const MARVIN_EDITOR_IS_EMPTY = '<cml><MDocument></MDocument></cml>';
 
 const BASE_URL = 'http://localhost/';// window.location.protocol + "//" + window.location.host + "/";
 
+export const MODAL = {
+  CREATE_TASK: 'CREATE_TASK',
+  EDIT_TASK: 'EDIT_TASK',
+};
+
 export const API = {
   CREATE_TASK: `${BASE_URL}api/task/create/0`,
   PREPARE_TASK: `${BASE_URL}api/task/prepare/`,
@@ -77,8 +82,6 @@ export const requestConfig = {
 
 export const URL = {
   INDEX: '/',
-  MANUAL: '/manual/',
-  PREPARE: '/prepare/',
+  VALIDATE: '/validate',
   RESULT: '/result/',
-  ERROR: '/error/',
 };

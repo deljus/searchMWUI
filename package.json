@@ -17,12 +17,13 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.0.10",
-    "react-select": "^1.0.0-rc",
+    "react-select": "^1.0.0-rc.10",
     "redux": "^3.7.1",
     "redux-devtools-extension": "^2.13.2",
     "redux-query": "^2.0.0",
     "styled-components": "^2.1.2",
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "antd": "^2.13.6"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

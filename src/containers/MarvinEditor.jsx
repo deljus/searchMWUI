@@ -1,24 +1,62 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../config';
 import { exportCmlBase64, clearMarvin, importCml } from '../core/marvinAPI';
+import { MODAL } from '../config';
 
-export const MarvinEditor = ({
+const Modal = styled.div`
+  opacity: ${props => (props.isShow ? 1 : 0)};
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: ${props => (props.isShow ? 100 : -1)};
+  overflow: hidden;
+  outline: 0;
+  background: rgba(0,0,0,0.4);
+  transition: opacity 0.5s ease-in;
+  transition: z-index 1s step-start, opacity 0.2s linear;
+`;
+
+const Content = styled.div`
+    position: relative;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    outline: 0;
+`;
+
+const Body = styled.div`
+  position: relative;
+  padding: 5px;
+`;
+
+const Iframe = styled.iframe`
+  border: 0;
+`;
+
+const MarvinEditor = ({
   modal,
-  closeModal,
-  addStruct,
-  editStruct,
+  onClose,
+  editTask,
+  createTask,
 }) => {
-  const submitModal = (id) => {
+  const submitModal = () => {
     exportCmlBase64(
       (cmlBase64) => {
         if (cmlBase64.cml === MARVIN_EDITOR_IS_EMPTY) return false;
-        if (id >= 0) {
-          editStruct(id, cmlBase64);
-        } else {
-          addStruct(cmlBase64);
+        switch (modal.typeAction) {
+          case MODAL.CREATE_TASK:
+            createTask({ data: cmlBase64.cml });
+            break;
+          case MODAL.EDIT_TASK:
+            editTask();
+            break;
         }
-        closeModal();
+        onClose();
       },
     );
   };
@@ -28,32 +66,47 @@ export const MarvinEditor = ({
   }
 
   return (
-    <div id={modal.visible ? '' : 'modal-hidden'} className="modal fade in" role="dialog">
+    <Modal isShow={modal.visible} role="dialog">
       <div className="modal-dialog modal-lg">
-        <div className="modal-content">
+        <Content>
           <div className="modal-header">
             <button
               type="button"
               className="close"
-              onClick={closeModal}
+              onClick={onClose}
             >
                             &times;
             </button>
           </div>
-          <div className="modal-body">
-            <iframe
+          <Body>
+            <Iframe
               title="marvinjs"
               id="marvinjs"
               data-toolbars="reaction"
               src={MARVIN_PATH_IFRAME}
+              width="100%"
+              height={500}
             />
-          </div>
+          </Body>
           <div className="modal-footer">
-            <Button onClick={() => { submitModal(modal.id); }}>Save</Button>
-            <Button onClick={closeModal}>Discard</Button>
+            <Button onClick={() => { submitModal(); }}>Save</Button>
+            <Button onClick={onClose}>Discard</Button>
           </div>
-        </div>
+        </Content>
       </div>
-    </div>
+    </Modal>
   );
 };
+
+MarvinEditor.propTypes = {
+  modal: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+  editTask: PropTypes.func.isRequired,
+  createTask: PropTypes.func.isRequired,
+};
+
+MarvinEditor.defaultProps = {
+  modal: null,
+};
+
+export default MarvinEditor;
