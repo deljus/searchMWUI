@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import { MarvinEditor } from '../../containers';
-import { marvinModal, validateTaskOuery } from '../../core/actions';
+import { marvinModal, validateTaskOuery, editCml } from '../../core/actions';
 import { URL } from '../../config';
 
 const mapStateToProps = state => ({
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch, props) => ({
       });
     }
   }),
+  editTask: data => dispatch(editCml(data, true)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MarvinEditor));

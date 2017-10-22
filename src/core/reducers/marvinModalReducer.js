@@ -7,7 +7,7 @@ const initState = {
 export const marvinModalReducer = (state = initState, action) => {
   switch (action.type) {
     case TRIGGER:
-      return { visible: action.bool, typeAction: action.typeAction };
+      return { visible: action.bool, typeAction: action.typeAction, cml: action.cml  };
     default:
       return state;
   }

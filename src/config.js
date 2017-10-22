@@ -9,7 +9,7 @@ export const MODAL = {
 };
 
 export const API = {
-  CREATE_TASK: `${BASE_URL}api/task/create/0`,
+  CREATE_TASK: `${BASE_URL}api/task/create/1`,
   PREPARE_TASK: `${BASE_URL}api/task/prepare/`,
   RESULT: `${BASE_URL}api/task/model/`,
   ADDITIVES: `${BASE_URL}api/resources/additives`,

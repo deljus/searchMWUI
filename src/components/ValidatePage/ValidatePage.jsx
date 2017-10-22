@@ -1,40 +1,79 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import Select from 'react-select';
 import PropTypes from 'prop-types';
-import { Loader, Error, Thumbnail, SelectModal } from '../../containers';
-import { URL } from '../../config';
+import { Loader, Error, Thumbnail, SelectModel } from '../../containers';
+import styled from 'styled-components';
 import 'react-select/dist/react-select.css';
+import { URL, CONST } from '../../config';
+import { message } from 'antd';
+import 'antd/lib/message/style/css';
 
-const ValidatePage = ({ task, models, isLoading, errorRequest, forceRequest, history }) => (
-  <div>
-    <Loader loaded={isLoading} />
 
-    {errorRequest && errorRequest.message && <Error
-      backBtn={() => history.push({ pathname: URL.INDEX })}
-      refreshBtn={() => forceRequest()}
-    />}
+const ButtonBack = styled.button`
+    float: left;
+`;
 
-    {!isLoading && !errorRequest.message && task && <div className="container container-search">
+const ButtonContinue = styled.button`
+    float: right;
+`;
 
-      <div className="row">
-        <div className="col-md-8">
-          <Thumbnail cml={task.structures[0].data} />
+const ValidatePage = ({ task, models, isLoading, errorRequest, forceRequest, history, openEditModal }) => {
+
+  const addModelList = (type) => {
+    if (type === CONST.StructureType.MOLECULE) {
+      return models.filter(o => o.type === CONST.ModelType.MOLECULE_SEARCHING);
+    } else if (type === CONST.StructureType.REACTION) {
+      return models.filter(o => o.type === CONST.ModelType.REACTION_SEARCHING);
+    }
+    return [];
+  };
+  return (
+    <div>
+      <Loader loaded={isLoading} />
+
+      {errorRequest && errorRequest.message && <Error
+        backBtn={() => history.push({ pathname: URL.INDEX })}
+        refreshBtn={() => forceRequest()}
+      />}
+
+      {!isLoading && !errorRequest.message && task && <div className="container container-search">
+
+        <div className="row">
+          <div className="col-md-8">
+            <Thumbnail
+              cml={task.cml}
+              base64={task.base64}
+              revalidate={task.revalidate}
+              onClickImage={openEditModal}
+            />
+          </div>
+          <div className="col-md-4">
+            <SelectModel models={addModelList(task.type)} />
+          </div>
+          <div className="col-md-12">
+            <ButtonBack
+              className="btn btn-default"
+              onClick={() => history.push(URL.INDEX)}
+            >
+              <span className="glyphicon glyphicon-chevron-left" />&nbsp;
+                    Back</ButtonBack>
+            {task && task.revalidate ? <ButtonContinue className="btn btn-danger">
+                Revalidate&nbsp;
+              <span className="glyphicon glyphicon-refresh" />
+            </ButtonContinue> : <ButtonContinue className="btn btn-primary">
+                    Сontinue&nbsp;
+              <span className="glyphicon glyphicon-chevron-right" />
+            </ButtonContinue> }
+          </div>
         </div>
-        <div className="col-md-4">
-          <SelectModal />
-        </div>
-        <div className="col-md-12 right">
-          <Button>Continium</Button>
-        </div>
-      </div>
-    </div>}
-  </div>
-);
+      </div>}
+    </div>
+  );
+};
 
 ValidatePage.propTypes = {
   task: PropTypes.object,
   isLoading: PropTypes.bool,
+  openEditModal: PropTypes.func.isRequired,
 };
 
 ValidatePage.defaultProps = {

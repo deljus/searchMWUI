@@ -32,6 +32,9 @@ export const getTasks = () => {
       credentials: 'include',
       headers: { 'Content-Type': '*/*' },
     },
+    meta: {
+      pointer: 'task',
+    },
     force: true,
   };
 };

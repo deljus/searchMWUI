@@ -79,3 +79,15 @@ export const addBase64Arr = (arrCml, success) => {
       },
     );
 };
+
+export const addBase64Obj = (obj, success) => {
+  window.MarvinJSUtil.getPackage('marvinjs')
+    .then(
+      (marvinName) => {
+        marvinName.onReady(() => {
+          obj.base64 = marvinName.ImageExporter.mrvToDataUrl(obj.data, SETTINGS.typeImg, SETTINGS);
+          success(obj);
+        });
+      },
+    );
+};

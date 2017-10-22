@@ -3,50 +3,53 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { cmlToBase64 } from '../core/marvinAPI';
 import { MARVIN_EDITOR_IS_EMPTY } from '../config';
+import { Button as BaseButton, Alert } from 'antd';
+import 'antd/lib/button/style/css';
+import 'antd/lib/alert/style/css';
 
-// const getBase64 = (cml) => {
-//     cmlToBase64(cml,
-//         (base64) =>
-//         )
-// }
+const Rigth = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 25px;
+`;
 
-class Thumbnail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      base64: '',
-    };
-  }
+const Button = styled(BaseButton)`
+  border-color: #108ee9;
+`;
 
-  componentDidMount() {
-    cmlToBase64(this.props.cml,
-      base64 =>
-        this.setState({ base64 }),
-    );
-  }
+const Thumbnail = ({ cml, base64, onClickImage, revalidate }) => (
+  <span
+    className="thumbnail"
+  >
 
-  render() {
-    return (
-      <span
-        onClick={() => this.props.onClickImage(this.props.cml)}
-        className="thumbnail"
-      >
-        <img
-          style={{ width: '700px', height: '500px' }}
-          src={this.state.base64}
-        />
-      </span>
-    );
-  }
-}
+    <Rigth>
+      <Button
+        type="primary"
+        ghost
+        shape="circle"
+        icon="edit"
+        size="large"
+        onClick={() => onClickImage(cml)}
+      />
+    </Rigth>
+    <img
+      style={{ width: '700px' }}
+      src={base64}
+    />
+    {revalidate && <Alert message="Your structure has changed, please revalidate the structure" type="info" showIcon />}
+  </span>
+);
 
 Thumbnail.propTypes = {
   cml: PropTypes.string,
+  base64: PropTypes.string,
+  revalidate: PropTypes.bool,
   onClickImage: PropTypes.func.isRequired,
 };
 
 Thumbnail.defaultProps = {
   cml: MARVIN_EDITOR_IS_EMPTY,
+  revalidate: false,
 };
 
 export default Thumbnail;

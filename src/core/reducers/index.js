@@ -1,9 +1,10 @@
+import { entitiesReducer, queriesReducer, errorsReducer } from 'redux-query';
 import { combineReducers } from 'redux';
 import { marvinModalReducer } from './marvinModalReducer';
-import { entitiesReducer, queriesReducer, errorsReducer, queryMiddleware } from 'redux-query';
+import { task } from './task';
 
-// Combine Reducers
 const reducers = combineReducers({
+  task,
   marvinModal: marvinModalReducer,
   queries: queriesReducer,
   entities: entitiesReducer,

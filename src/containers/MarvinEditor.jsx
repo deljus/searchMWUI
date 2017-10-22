@@ -46,14 +46,14 @@ const MarvinEditor = ({
 }) => {
   const submitModal = () => {
     exportCmlBase64(
-      (cmlBase64) => {
-        if (cmlBase64.cml === MARVIN_EDITOR_IS_EMPTY) return false;
+      (data) => {
+        if (data.cml === MARVIN_EDITOR_IS_EMPTY) return false;
         switch (modal.typeAction) {
           case MODAL.CREATE_TASK:
-            createTask({ data: cmlBase64.cml });
+            createTask({ data: data.cml });
             break;
           case MODAL.EDIT_TASK:
-            editTask();
+            editTask( data );
             break;
         }
         onClose();
@@ -62,7 +62,7 @@ const MarvinEditor = ({
   };
 
   if (modal.visible) {
-    if (modal.id >= 0) { importCml(modal.cml); } else { clearMarvin(); }
+    if (modal.actionType = MODAL.EDIT_TASK) { importCml(modal.cml); } else { clearMarvin(); }
   }
 
   return (

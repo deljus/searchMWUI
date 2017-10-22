@@ -5,6 +5,6 @@ import PageSteps from './PageSteps';
 import Loader from './Loader';
 import Error from './Error';
 import Thumbnail from './Thumbnail';
-import SelectModal from './SelectModal';
+import SelectModel from './SelectModel';
 
-export { NewsImage, SearchInput, MarvinEditor, PageSteps, Loader, Error, Thumbnail, SelectModal };
+export { NewsImage, SearchInput, MarvinEditor, PageSteps, Loader, Error, Thumbnail, SelectModel };
