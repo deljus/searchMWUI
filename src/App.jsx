@@ -6,8 +6,10 @@ import store from './core/store';
 import {
   IndexPage,
   NotFoundPage,
-  ValidatePage } from './components';
+  ValidatePage,
+  ResultPage } from './components';
 import { MarvinEditorView, PageStepsView } from './components/WrappedContainers';
+import { URL } from './config';
 
 const Main = ({ children }) => (
   <div>
@@ -22,8 +24,9 @@ export default (
     <HashRouter>
       <Main>
         <Switch>
-          <Route exact path="/" component={IndexPage} />
-          <Route exact path="/validate" component={ValidatePage} />
+          <Route exact path={URL.INDEX} component={IndexPage} />
+          <Route exact path={URL.VALIDATE} component={ValidatePage} />
+          <Route exact path={URL.RESULT} component={ResultPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Main>

@@ -6,5 +6,6 @@ import Loader from './Loader';
 import Error from './Error';
 import Thumbnail from './Thumbnail';
 import SelectModel from './SelectModel';
+import ResultItem from './ResultItem';
 
-export { NewsImage, SearchInput, MarvinEditor, PageSteps, Loader, Error, Thumbnail, SelectModel };
+export { NewsImage, SearchInput, MarvinEditor, PageSteps, Loader, Error, Thumbnail, SelectModel, ResultItem };

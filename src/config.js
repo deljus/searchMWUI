@@ -83,5 +83,5 @@ export const requestConfig = {
 export const URL = {
   INDEX: '/',
   VALIDATE: '/validate',
-  RESULT: '/result/',
+  RESULT: '/result',
 };
