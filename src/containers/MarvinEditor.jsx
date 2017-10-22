@@ -17,8 +17,6 @@ const Modal = styled.div`
   overflow: hidden;
   outline: 0;
   background: rgba(0,0,0,0.4);
-  transition: opacity 0.5s ease-in;
-  transition: z-index 1s step-start, opacity 0.2s linear;
 `;
 
 const Content = styled.div`
