@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Select from 'react-select';
+import Select from 'antd/lib/select';
+import 'antd/lib/select/style/css';
+
+const Option = Select.Option;
 
 const Container = styled.div`
     display: inlite-block;
@@ -9,11 +12,11 @@ const Container = styled.div`
 `;
 
 const Descriptions = styled.span`
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 const Title = styled.span`
-  font-size: 16px;
+  font-size: 14px;
   display: block;
   padding: 8px 0px;
   font-weight: bold;
@@ -23,31 +26,41 @@ class SelectModel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      model: this.props.models ? this.props.models[0] : { description: '' },
+      value: null,
     };
   }
 
-  onChangeModel = (model) => {
-    this.setState({ model });
-  };
+  selectModel() {
+    return this.state.value || this.props.models[0].value.toString();
+  }
+
+  handleChange(value) {
+    this.setState({ value });
+  }
 
   render() {
+    const { models } = this.props;
+    const { value } = this.state;
     return (
       <Container>
         <Title>Select models:</Title>
         <Select
-          name="form-field-name"
-          value={this.state.model}
-          options={this.props.models}
-          onChange={this.onChangeModel}
-        />
-        {this.state.model.description ?
-          <Descriptions>
-            <Title>Description selected model:</Title>
-            {this.state.model.description}
-          </Descriptions>
-          : ''
-        }
+          value={value || models[0].value.toString()}
+          size="large"
+          style={{ width: '100%' }}
+          onChange={this.handleChange}
+        >
+          { models.map(model => <Option key={model.value} value={model.value.toString()} >{ model.label }</Option>) }
+        </Select>
+        <Descriptions>
+          <Title>
+            <span className="glyphicon glyphicon-info-sign" />&nbsp;
+              Description models:
+          </Title>
+          { models.map(model => (<div key={model.value}>
+            <div><b>{model.label}:</b></div>{ model.description }
+          </div>)) }
+        </Descriptions>
       </Container>
     );
   }
