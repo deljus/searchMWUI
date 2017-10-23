@@ -38,3 +38,12 @@ export const getTasks = () => {
     force: true,
   };
 };
+
+export const revalidateTask = (cml) => {
+  const taskId = queryString.parse(window.location.hash)['/validate?task'];
+  return {
+    url: API.PREPARE_TASK + taskId,
+    body: { data: cml },
+    options: { credentials: 'include' },
+  };
+};

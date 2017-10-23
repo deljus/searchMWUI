@@ -16,8 +16,7 @@ const ButtonContinue = styled.button`
     float: right;
 `;
 
-const ValidatePage = ({ task, models, isLoading, errorRequest, forceRequest, history, openEditModal }) => {
-
+const ValidatePage = ({ task, models, isLoading, errorRequest, forceRequest, history, openEditModal, onRevalidate }) => {
   const addModelList = (type) => {
     if (type === CONST.StructureType.MOLECULE) {
       return models.filter(o => o.type === CONST.ModelType.MOLECULE_SEARCHING);
@@ -56,13 +55,18 @@ const ValidatePage = ({ task, models, isLoading, errorRequest, forceRequest, his
             >
               <span className="glyphicon glyphicon-chevron-left" />&nbsp;
                     Back</ButtonBack>
-            {task && task.revalidate ? <ButtonContinue className="btn btn-danger">
-                Revalidate&nbsp;
-              <span className="glyphicon glyphicon-refresh" />
-            </ButtonContinue> : <ButtonContinue className="btn btn-primary">
+            {task && task.revalidate ?
+              <ButtonContinue
+                className="btn btn-danger"
+                onClick={() => onRevalidate(task.cml)}
+              >
+                    Revalidate&nbsp;
+                <span className="glyphicon glyphicon-refresh" />
+              </ButtonContinue> :
+              <ButtonContinue className="btn btn-primary">
                     Сontinue&nbsp;
-              <span className="glyphicon glyphicon-chevron-right" />
-            </ButtonContinue> }
+                <span className="glyphicon glyphicon-chevron-right" />
+              </ButtonContinue> }
           </div>
         </div>
       </div>}

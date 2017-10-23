@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { connectRequest, querySelectors, errorSelectors } from 'redux-query';
 import { withRouter } from 'react-router-dom';
-import { marvinModal } from '../../core/actions';
+import { marvinModal, revalidatingTaskQuery, validateTaskOuery } from '../../core/actions';
 import { getModels, getTasks } from '../../core/queries';
 import ValidatePage from './ValidatePage';
+import queryString from 'query-string';
 import { MODAL } from '../../config';
 
 const mapStateToProps = state => ({
@@ -14,11 +15,22 @@ const mapStateToProps = state => ({
   errorRequest: errorSelectors.responseBody(state.errors, getTasks()),
 });
 
-const mapDispatchToProps = dispatch => ({
-    openEditModal: (cml) => dispatch(marvinModal(true, MODAL.EDIT_TASK, cml)),
-})
+const mapDispatchToProps = (dispatch, props) => ({
+  openEditModal: cml => dispatch(marvinModal(true, MODAL.EDIT_TASK, cml)),
+  onRevalidate: (cml) => {
+    dispatch(validateTaskOuery({ data: cml })).then((result) => {
+      if (result.status >= 200 && result.status < 300) {
+        props.history.push({
+          pathname: URL.VALIDATE,
+          search: queryString.stringify({ task: result.transformed.task }),
+        });
+        props.forceRequest();
+      }
+    });
+  },
+
+});
 
 export default withRouter(compose(
-  connect(mapStateToProps, mapDispatchToProps),
   connectRequest(getModels),
-  connectRequest(getTasks))(ValidatePage));
+  connectRequest(getTasks), connect(mapStateToProps, mapDispatchToProps))(ValidatePage));
