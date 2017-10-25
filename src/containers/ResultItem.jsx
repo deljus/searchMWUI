@@ -1,20 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Button as BaseButton, Alert } from 'antd';
+import 'antd/lib/button/style/css';
+import 'antd/lib/alert/style/css';
+
+const Rigth = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
+
+const Button = styled(BaseButton)`
+  border-color: #108ee9;
+  margin: 5px;
+`;
+
 
 const ResultItem = ({ count, base64, result }) => (
   <div className="row">
-    <div className="col-md-5">{count}
+    <div className="col-md-5 thumbnail">{count}
+        <Rigth>
+            <Button
+                type="primary"
+                ghost
+                shape="circle"
+                icon="double-right"
+                size="large"
+                // onClick={() => onClickImage(cml)}
+            />
+            <Button
+                type="primary"
+                ghost
+                shape="circle"
+                icon="search"
+                size="large"
+                // onClick={() => onClickImage(cml)}
+            />
+        </Rigth>
         <img src={base64} width={350}/>
     </div>
     <div className="col-md-7">
         <ul className="nav nav-tabs">
-            ...
             <li >
                 <a className="dropdown-toggle" data-toggle="dropdown" href="#">
                     Dropdown <span className="caret"></span>
                 </a>
             </li>
-            ...
         </ul>
     </div>
   </div>
