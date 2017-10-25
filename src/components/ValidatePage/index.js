@@ -2,11 +2,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { connectRequest, querySelectors, errorSelectors } from 'redux-query';
 import { withRouter } from 'react-router-dom';
-import { marvinModal, revalidatingTaskQuery, validateTaskOuery } from '../../core/actions';
+import { marvinModal, resultTaskOuery, validateTaskOuery } from '../../core/actions';
 import { getModels, getTasks } from '../../core/queries';
 import ValidatePage from './ValidatePage';
 import queryString from 'query-string';
-import { MODAL } from '../../config';
+import {MODAL, CONST, URL} from '../../config';
+
 
 const mapStateToProps = state => ({
   task: state.task,
@@ -28,7 +29,16 @@ const mapDispatchToProps = (dispatch, props) => ({
       }
     });
   },
-
+  onContinue: (data) => {
+    dispatch(resultTaskOuery(data)).then((result) => {
+      if (result.status >= 200 && result.status < 300) {
+        props.history.push({
+          pathname: URL.RESULT,
+          search: queryString.stringify({ task: result.transformed.task }),
+        });
+      }
+    });
+  },
 });
 
 export default withRouter(compose(

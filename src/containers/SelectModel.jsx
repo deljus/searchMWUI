@@ -48,7 +48,7 @@ class SelectModel extends Component {
           value={value || models[0].value.toString()}
           size="large"
           style={{ width: '100%' }}
-          onChange={this.handleChange}
+          onChange={this.handleChange.bind(this)}
         >
           { models.map(model => <Option key={model.value} value={model.value.toString()} >{ model.label }</Option>) }
         </Select>

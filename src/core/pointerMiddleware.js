@@ -1,5 +1,5 @@
-import { addTask } from './actions';
-import { addBase64Obj } from './marvinAPI';
+import { addTask, addResult } from './actions';
+import { addBase64Obj, addBase64Arr } from './marvinAPI';
 
 export const pointer = store => next => (action) => {
   if (action.meta) {
@@ -15,6 +15,16 @@ export const pointer = store => next => (action) => {
           store.dispatch(addTask(task));
         },
       );
+    } else if (action.entities && action.meta.pointer === 'result') {
+      addBase64Arr(action.entities.result.structures,
+        (data1) => {
+          const result = data1.map(obj => ({
+            base64: obj.base64,
+            cml: obj.data,
+            models: obj.models,
+          }));
+          store.dispatch(addResult(result));
+        });
     }
   }
   return next(action);

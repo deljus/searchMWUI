@@ -39,11 +39,41 @@ export const getTasks = () => {
   };
 };
 
+export const getResults = () => {
+  const taskId = queryString.parse(window.location.hash)['/result?task'];
+  return {
+    url: API.RESULT + taskId,
+    transform: body => ({
+      result: body,
+    }),
+    update: {
+      result: (prev, next) => next,
+    },
+    options: {
+      credentials: 'include',
+      headers: { 'Content-Type': '*/*' },
+    },
+    meta: {
+      pointer: 'result',
+    },
+    force: true,
+  };
+};
+
 export const revalidateTask = (cml) => {
   const taskId = queryString.parse(window.location.hash)['/validate?task'];
   return {
     url: API.PREPARE_TASK + taskId,
     body: { data: cml },
+    options: { credentials: 'include' },
+  };
+};
+
+export const resultTask = (data) => {
+  const taskId = queryString.parse(window.location.hash)['/validate?task'];
+  return {
+    url: API.RESULT + taskId,
+    body: data,
     options: { credentials: 'include' },
   };
 };
