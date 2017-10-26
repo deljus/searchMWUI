@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchInput from '../../containers/SearchInput';
+import { SearchInputView } from '../WrappedContainers';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Pagination } from 'antd';
@@ -31,29 +31,29 @@ class ResultPage extends Component {
 
     return (
       <div>
-        <ModalIncrease ref={(e) => { this.modal = e; }}  />
+        <ModalIncrease ref={(e) => { this.modal = e; }} />
         {errorRequest && errorRequest.message && <Error
           backBtn={() => history.back()}
           refreshBtn={() => forceRequest()}
         />}
         <Loader loaded={isLoading} />
         <Wrapper>
-          <SearchInput />
+          <SearchInputView />
         </Wrapper>
-          <ResultWrapped>
-        {results && results.map((result, count) =>
-          (<ResultItem
-            count={count + 1}
-            base64={result.base64}
-            onClickIcrease={() => this.showIncreaseModel(result.base64)}
-            result={result.models[0].results}
-          />),
-        )
-        }
-          </ResultWrapped>
-        {/*<CenterWrap>*/}
-          {/*<Pagination defaultCurrent={1} total={50} />*/}
-        {/*</CenterWrap>*/}
+        <ResultWrapped>
+          {results && results.map((result, count) =>
+            (<ResultItem
+              count={count + 1}
+              base64={result.base64}
+              onClickIcrease={() => this.showIncreaseModel(result.base64)}
+              result={result.models[0].results}
+            />),
+          )
+          }
+        </ResultWrapped>
+        {/* <CenterWrap> */}
+        {/* <Pagination defaultCurrent={1} total={50} /> */}
+        {/* </CenterWrap> */}
       </div>
     );
   }

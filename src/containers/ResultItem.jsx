@@ -17,32 +17,24 @@ const Button = styled(BaseButton)`
   margin: 5px;
 `;
 
+const Image = styled.img`
+  cursor: pointer;
+`;
 
 const ResultItem = ({ count, base64, result, onClickIcrease }) => (
   <div className="row">
     <div className="col-md-5 thumbnail">
-
-      <Badge count={count} style={{ backgroundColor: '#337ab7' }} />
-
       <Rigth>
         <Button
           type="primary"
           ghost
           shape="circle"
           icon="double-right"
-          size="large"
+          size="small"
           // onClick={() => onClickImage(cml)}
         />
-        <Button
-          type="primary"
-          ghost
-          shape="circle"
-          icon="search"
-          size="large"
-          onClick={() => onClickIcrease()}
-        />
       </Rigth>
-      <img src={base64} width={350} />
+      <Image src={base64} width={350} onClick={() => onClickIcrease()} />
     </div>
     <div className="col-md-7">
       <ul className="nav nav-tabs">
@@ -54,7 +46,7 @@ const ResultItem = ({ count, base64, result, onClickIcrease }) => (
 
 
       </ul>
-        { result && result.map((res) => <p>{res.key}: {res.value}</p>) }
+      { result && result.map(res => <p>{res.key}: {res.value}</p>) }
     </div>
   </div>
 );

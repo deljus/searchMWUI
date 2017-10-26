@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { SearchInput, NewsImage } from '../../containers';
+import { SearchInputView } from '../WrappedContainers';
 import { cmlToBase64, importCml } from '../../core/marvinAPI';
 
 const IndexPageWrapper = styled.div`
@@ -17,10 +17,7 @@ const IndexPage = ({
   openMarvinModal,
 }) => (
   <IndexPageWrapper className="container seach-container">
-    <SearchInput
-      onOpenModalClick={openMarvinModal}
-      onSearchFormSubmit={searchFormSubmit}
-    />
+    <SearchInputView />
   </IndexPageWrapper>
 );
 
