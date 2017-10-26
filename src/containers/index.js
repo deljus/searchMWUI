@@ -7,5 +7,6 @@ import Error from './Error';
 import Thumbnail from './Thumbnail';
 import SelectModel from './SelectModel';
 import ResultItem from './ResultItem';
+import ModalIncrease from './ModalIncrease';
 
-export { NewsImage, SearchInput, MarvinEditor, PageSteps, Loader, Error, Thumbnail, SelectModel, ResultItem };
+export { NewsImage, SearchInput, MarvinEditor, PageSteps, Loader, Error, Thumbnail, SelectModel, ResultItem, ModalIncrease };
