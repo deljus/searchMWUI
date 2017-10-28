@@ -20,6 +20,37 @@ export const cmlToBase64 = (cml, success, err) => {
       },
     );
 };
+
+export const textToCml = (text, success, err) => {
+  const _this = this;
+  window.MarvinJSUtil.getEditor('#marvinjs')
+    .then(
+      (sketcher) => {
+        sketcher.importStructure('auto', text)
+          .then(
+            () => {
+              sketcher.exportStructure('mrv')
+                .then(
+                  (cml) => {
+                    success(cml);
+                  },
+                  (error) => {
+                    err(error);
+                  },
+                );
+            },
+            (error) => {
+              err(error);
+            },
+
+          );
+      },
+      (error) => {
+        err(error);
+      },
+    );
+};
+
 //
 export const importCml = (cml, err) => {
   window.MarvinJSUtil.getEditor('#marvinjs')

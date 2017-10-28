@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { SearchInputView } from '../WrappedContainers';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Pagination } from 'antd';
+import { Pagination, BackTop } from 'antd';
 import { ResultItem, Loader, Error, ModalIncrease } from '../../containers';
 import 'antd/lib/pagination/style/css';
+import 'antd/lib/back-top/style/css';
 
 const Wrapper = styled.div`
     padding-bottom: 20px;
@@ -54,6 +55,7 @@ class ResultPage extends Component {
         {/* <CenterWrap> */}
         {/* <Pagination defaultCurrent={1} total={50} /> */}
         {/* </CenterWrap> */}
+        <BackTop />
       </div>
     );
   }

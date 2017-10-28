@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getInputStyle, SearchInputWrapper, SubmitBtn } from '../styled/InputSearch';
+import { textToCml } from '../core/marvinAPI';
 
 
 const SearchInput = ({ onOpenModalClick, onSearchFormSubmit }) => {
   let inputText;
+  let errorText = '';
 
   const submitForm = () => {
     if (inputText.value) {
-      onSearchFormSubmit(inputText.value);
+      textToCml(inputText.value,
+        cml => onSearchFormSubmit({ data: cml }),
+        () => errorText = 'Structure not found',
+      );
     }
   };
 
@@ -37,7 +42,7 @@ const SearchInput = ({ onOpenModalClick, onSearchFormSubmit }) => {
             <span className="glyphicon glyphicon-search" />
           </SubmitBtn>
         </div>
-
+        {errorText}
       </SearchInputWrapper>
     </div>);
 };
