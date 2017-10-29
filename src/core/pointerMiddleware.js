@@ -1,4 +1,4 @@
-import { addTask, addResult } from './actions';
+import { addTask, addResult, addHistory } from './actions';
 import { addBase64Obj, addBase64Arr } from './marvinAPI';
 
 export const pointer = store => next => (action) => {

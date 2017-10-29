@@ -21,7 +21,11 @@ const Image = styled.img`
   cursor: pointer;
 `;
 
-const ResultItem = ({ count, base64, result, onClickIcrease }) => (
+const ResultText = styled.div`
+  padding: 10px;
+`;
+
+const ResultItem = ({ count, base64, result, onClickIcrease, onSearchImage }) => (
   <div className="row">
     <div className="col-md-5 thumbnail">
       <Rigth>
@@ -30,8 +34,8 @@ const ResultItem = ({ count, base64, result, onClickIcrease }) => (
           ghost
           shape="circle"
           icon="double-right"
-          size="small"
-          // onClick={() => onClickImage(cml)}
+          size="large"
+          onClick={() => onSearchImage()}
         />
       </Rigth>
       <Image src={base64} width={350} onClick={() => onClickIcrease()} />
@@ -39,14 +43,14 @@ const ResultItem = ({ count, base64, result, onClickIcrease }) => (
     <div className="col-md-7">
       <ul className="nav nav-tabs">
         <li >
-          <a className="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Dropdown <span className="caret" />
+          <a>
+              Info
           </a>
         </li>
-
-
       </ul>
-      { result && result.map(res => <p>{res.key}: {res.value}</p>) }
+      <ResultText>
+        { result && result.map(res => <p>{res.key}: {res.value}</p>) }
+      </ResultText>
     </div>
   </div>
 );

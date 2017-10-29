@@ -22,13 +22,20 @@ const ResultWrapped = styled.div`
     padding-top: 50px;
 `;
 
+const RightWrap = styled.div`
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-align: right;
+`;
+
 class ResultPage extends Component {
   showIncreaseModel = (base64) => {
     this.modal.showModal(base64);
   }
 
   render() {
-    const { errorRequest, forceRequest, isLoading, results, history } = this.props;
+    const { errorRequest, forceRequest, isLoading, results, history, onSearchImg } = this.props;
 
     return (
       <div>
@@ -41,6 +48,9 @@ class ResultPage extends Component {
         <Wrapper>
           <SearchInputView />
         </Wrapper>
+        {/*<RightWrap>*/}
+          {/*<Pagination defaultCurrent={1} total={50} />*/}
+        {/*</RightWrap>*/}
         <ResultWrapped>
           {results && results.map((result, count) =>
             (<ResultItem
@@ -48,13 +58,12 @@ class ResultPage extends Component {
               base64={result.base64}
               onClickIcrease={() => this.showIncreaseModel(result.base64)}
               result={result.models[0].results}
+              onSearchImage={() => onSearchImg({ data: result.cml })}
             />),
           )
           }
         </ResultWrapped>
-        {/* <CenterWrap> */}
-        {/* <Pagination defaultCurrent={1} total={50} /> */}
-        {/* </CenterWrap> */}
+
         <BackTop />
       </div>
     );

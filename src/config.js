@@ -84,4 +84,6 @@ export const URL = {
   INDEX: '/',
   VALIDATE: '/validate',
   RESULT: '/result',
+  HISTORY: '/history',
+  INFO: '/info',
 };

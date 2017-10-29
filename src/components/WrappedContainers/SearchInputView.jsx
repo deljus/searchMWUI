@@ -5,6 +5,10 @@ import { marvinModal, validateTaskOuery } from '../../core/actions';
 import { SearchInput } from '../../containers';
 import { MODAL, URL } from '../../config';
 
+const mapStateToProps = () => ({
+  buttonURL: [{ name: 'Index page', url: URL.INDEX },{ name: 'Info', url: URL.INFO }, { name: 'Hisrory', url: URL.HISTORY }],
+});
+
 const mapDispatchToProps = (dispatch, props) => ({
   onOpenModalClick: () => dispatch(marvinModal(true, MODAL.CREATE_TASK)),
   onSearchFormSubmit: data => dispatch(validateTaskOuery(data)).then((result) => {
@@ -17,4 +21,4 @@ const mapDispatchToProps = (dispatch, props) => ({
   }),
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(SearchInput));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchInput));

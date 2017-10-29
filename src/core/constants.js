@@ -1,15 +1,19 @@
 export const TRIGGER = 'TRIGGER';
 
 export const TASK = {
-  ADD: 'ADD',
+  ADD: 'ADD_TASK',
   EDIT_CML: 'EDIT_CML',
 };
 
 export const MODELS = {
-  ADD: 'ADD',
+  ADD: 'ADD_MODELS',
   SELECT: 'SELECT',
 };
 
 export const RESULT = {
-  ADD: 'ADDD',
+  ADD: 'ADD_RESULT',
+}
+
+export const HISTORY = {
+  ADD: 'ADD_HISTORY',
 }

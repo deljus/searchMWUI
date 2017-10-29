@@ -7,7 +7,9 @@ import {
   IndexPage,
   NotFoundPage,
   ValidatePage,
-  ResultPage } from './components';
+  ResultPage,
+  HistoryPage,
+    InfoPage } from './components';
 import { MarvinEditorView, PageStepsView } from './components/WrappedContainers';
 import { URL } from './config';
 
@@ -27,6 +29,8 @@ export default (
           <Route exact path={URL.INDEX} component={IndexPage} />
           <Route exact path={URL.VALIDATE} component={ValidatePage} />
           <Route exact path={URL.RESULT} component={ResultPage} />
+          <Route exact path={URL.HISTORY} component={HistoryPage} />
+            <Route exact path={URL.INFO} component={InfoPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Main>

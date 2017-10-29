@@ -25,7 +25,6 @@ class ModalIncrease extends Component {
       return (
         <div>
           <Modal
-            title="Title"
             visible={visible}
             width={800}
             footer={false}

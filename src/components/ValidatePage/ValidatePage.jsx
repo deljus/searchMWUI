@@ -34,7 +34,7 @@ class ValidatePage extends Component {
     const { task, onContinue } = this.props;
     const model = this.select.selectModel();
     const data = { models: [{ model, data: task.cml }], structure: 1 };
-    onContinue(data);
+    onContinue(data, { base64: task.base64 });
   }
 
   render() {

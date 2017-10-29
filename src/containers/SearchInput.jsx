@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Button } from 'antd';
 import { getInputStyle, SearchInputWrapper, SubmitBtn } from '../styled/InputSearch';
 import { textToCml } from '../core/marvinAPI';
+import 'antd/lib/button/style/css';
 
+const ButtonWrap = styled.div`
+  padding-top: 10px;
+`;
 
-const SearchInput = ({ onOpenModalClick, onSearchFormSubmit }) => {
+const SearchInput = ({ onOpenModalClick, onSearchFormSubmit, buttonURL, history }) => {
   let inputText;
   let errorText = '';
 
@@ -44,12 +50,22 @@ const SearchInput = ({ onOpenModalClick, onSearchFormSubmit }) => {
         </div>
         {errorText}
       </SearchInputWrapper>
+      <ButtonWrap>
+        {buttonURL && buttonURL.map(link =>
+          <Button type="dashed" onClick={() => history.push(link.url)}>{link.name}</Button>,
+        )}
+      </ButtonWrap>
     </div>);
 };
 
 SearchInput.propTypes = {
   onOpenModalClick: PropTypes.func.isRequired,
   onSearchFormSubmit: PropTypes.func.isRequired,
+  buttonURL: PropTypes.arrayOf(PropTypes.object),
+};
+
+SearchInput.defaultProps = {
+  buttonURL: null,
 };
 
 export default SearchInput;
